@@ -1,4 +1,0 @@
-Edgy
-====
-
-F# Graph Library
