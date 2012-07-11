@@ -36,13 +36,13 @@ let WeightedPath (inval: 'a) = { Tail = inval; Edges = Map.empty }
 
 /// Combines a sequence of paths, duplicate edges are ignored
 let Combine paths = 
-    paths |> Seq.reduce (fun l r -> { r with Edges = Map.ofSeq [ yield! l.Edges |> Map.toSeq; yield! r.Edges |> Map.toSeq ] })
+    paths |> Seq.reduce (fun l r -> { r with Edges = Map.ofSeq [yield! r.Edges |> Map.toSeq; yield! l.Edges |> Map.toSeq] })
 
 // Example
 let toalWeightedGraph =
     [
         WeightedPath "A" <=|1.0|= "B" =|0.5|=> "C" <=|0.2|= "D"
-        WeightedPath "A" =|0.4|=> "E" =|0.2|=> "D"
+        WeightedPath "A" =|0.4|=> "B" =|0.2|=> "C"
     ] |> Combine
 
 //val toalWeightedGraph : WeightedPath<string,float> =
