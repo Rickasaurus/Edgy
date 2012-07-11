@@ -1,53 +1,71 @@
-﻿module Graphs
+﻿module Graph
 
-type Graph<'a when 'a: comparison> = 
+type Edge<'a> = 'a * 'a
+
+type Path<'a when 'a: comparison> = 
     {   
-        /// Element to attach to
-        Current: 'a
+        /// The last element attached
+        Tail: 'a
         /// (From --> To) Set
-        Edges: ('a * 'a) Set
+        Edges: Edge<'a> Set
     }
 
-type Graph
+type Path
     with
-        // N <== a
-        static member op_LessEqualsEquals (l: Graph<'a>, r: 'a) : Graph<'a> =
-            { Current = r; Edges = l.Edges |> Set.add (r, l.Current) }
-        // N ==> a
-        static member op_EqualsEqualsGreater (l: Graph<'a>, r: 'a) : Graph<'a> =
-            { Current = r; Edges = l.Edges |> Set.add (l.Current, r) }
+        /// N <== a
+        static member op_LessEqualsEquals (l: Path<'a>, r: 'a) : Path<'a> =
+            { Tail = r; Edges = l.Edges |> Set.add (r, l.Tail) }
+        /// N ==> a
+        static member op_EqualsEqualsGreater (l: Path<'a>, r: 'a) : Path<'a> =
+            { Tail = r; Edges = l.Edges |> Set.add (l.Tail, r) }
 
 /// Pseudo Graph Record Type Constructor
-let Graph (inval: 'a) = { Current = inval; Edges = Set.empty }
+let Path (inval: 'a) = { Tail = inval; Edges = Set.empty }
 
-/// Combines all graphs
-let combine = Seq.reduce (fun l r -> { r with Edges = Set.union l.Edges r.Edges })
+/// Combines a sequence of paths, duplicate edges are ignored
+let combine paths = 
+    paths |> Seq.reduce (fun l r -> { r with Edges = Set.union l.Edges r.Edges })
 
-/// Finds all leaves
-let leaves r = r.Edges |> Seq.collect (fun (l,r) -> [l;r]) |> Seq.countBy id |> Seq.filter (snd>>(=)1) |> Seq.map fst
+/// Given a set of edges, find all leaves
+let leaves edges = 
+    edges |> Seq.collect (fun (l,r) -> [l;r]) |> Seq.countBy id |> Seq.filter (snd>>(=)1) |> Seq.map fst
 
-/// Finds a set of all nodes
-let allNodes r = r.Edges |> Seq.collect (fun (l,r) -> [l;r]) |> Set.ofSeq
+/// Given a set of edges, find a set of all nodes
+let allNodes edges = edges |> Seq.collect (fun (l,r) -> [l;r]) |> Set.ofSeq
 
-/// Finds all nodes, and their parents 
-let allNodesWithParents r = r.Edges 
-                            |> Seq.collect (fun (l,r) -> [l, Set.empty; r, Set.singleton l]) 
-                            |> Seq.groupBy fst 
-                            |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
+/// Given a set of directed edges represented as tuples s.t. (a,b) implies a is the parent and b is the child, find all nodes and their parents 
+let allNodesWithParents edges =
+    edges |> Seq.collect (fun (l,r) -> [l, Set.empty; r, Set.singleton l]) 
+    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
 
-/// Finds all nodes with parents, and those parents
-let nodesWithParents r = r.Edges |> Seq.groupBy snd |> Seq.map (fun (n, seq) -> n, seq |> Seq.map fst)
+/// Given a set of directed edges represented as tuples s.t. (a,b) implies a is the parent and b is the child, find all nodes with parents and those parents
+let nodesWithParents edges = edges |> Seq.groupBy snd |> Seq.map (fun (n, seq) -> n, seq |> Seq.map fst)
+
+/// Given a set of edges, find all nodes and those they are connected to
+let allNodesWithConnected edges =
+    edges |> Seq.collect (fun (l,r) -> [l, Set.singleton r; r, Set.singleton l]) 
+    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
+
+/// Given a set of directed edges, find the minimum spanning tree with Prim's algorithm
+//let primMST edges = 
+//    let h :: t = edges
+//    let V = Set.empty
+//    let V_new = Set.singleton h
+//    let E_new = Set.empty
+//    while V_new <> V do
+//        
+
 
 // Example
 let totalGraph = 
     [
-        Graph 2 <== 1
-        Graph 2 <== 1 ==> 3
-        Graph 2 ==> 4 <== 3 ==> 5
-        Graph 2 ==> 4 <== 3 <== 8
-        Graph 4 ==> 6
+        Path 2 <== 1
+        Path 2 <== 1 ==> 3
+        Path 2 ==> 4 <== 3 ==> 5
+        Path 2 ==> 4 <== 3 <== 8
+        Path 4 ==> 6
     ] |> combine
 
-// val totalGraph : Graph<int> =
+// val totalGraph : Path<int> =
 //  {Current = 6;
 //   Edges = set [(1, 2); (1, 3); (2, 4); (3, 4); (3, 5); (4, 6); (8, 3)];}
