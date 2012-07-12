@@ -1,6 +1,10 @@
 ﻿module Edgy.DirectedGraph
 #nowarn "62"
 
+#if INTERACTIVE 
+#load "Core.fs"
+#endif
+
 open Edgy.Core
 
 /// Combines a sequence of paths, duplicate edges are ignored
@@ -26,16 +30,6 @@ let nodesWithParents edges = edges |> Seq.groupBy snd |> Seq.map (fun (n, seq) -
 let allNodesWithConnected edges =
     edges |> Seq.collect (fun (l,r) -> [l, Set.singleton r; r, Set.singleton l]) 
     |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
-
-/// Given a set of directed edges, find the minimum spanning tree with Prim's algorithm
-//let primMST edges = 
-//    let h :: t = edges
-//    let V = Set.empty
-//    let V_new = Set.singleton h
-//    let E_new = Set.empty
-//    while V_new <> V do
-//        
-
 
 // Example
 let private totalGraph () = 
