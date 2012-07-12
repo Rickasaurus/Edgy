@@ -21,12 +21,10 @@ let allNodes (weightedEdges: (Edge<_>,  _) Map) = weightedEdges |> Seq.collect (
 let kruskal (edges: (Edge<_>, _) Map) =
     let N = edges |> allNodes |> Set.toSeq |> Seq.mapi (fun i n -> n,i) |> Map.ofSeq
     let rec inner S (V: QuickUWPC) F = 
-        printfn "%A" S
         match S with
         | [] -> F
         | ((a,b), w) :: S -> 
-            let ai, bi = N.[a], N.[b] 
-            printfn "Roots: [%i (%i)] [%i (%i)]" ai (V.Root(ai)) bi (V.Root(bi))             
+            let ai, bi = N.[a], N.[b]            
             if not <| V.Find(ai,bi) 
             then V.Union(ai,bi)
                  inner S V (((a,b),w) :: F)
