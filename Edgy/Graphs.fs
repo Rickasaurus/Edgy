@@ -1,29 +1,10 @@
-﻿module Graph
+﻿module Edgy.DirectedGraph
+#nowarn "62"
 
-type Edge<'a> = 'a * 'a
-
-type Path<'a when 'a: comparison> = 
-    {   
-        /// The last element attached
-        Tail: 'a
-        /// (From --> To) Set
-        Edges: Edge<'a> Set
-    }
-
-type Path
-    with
-        /// N <== a
-        static member op_LessEqualsEquals (l: Path<'a>, r: 'a) : Path<'a> =
-            { Tail = r; Edges = l.Edges |> Set.add (r, l.Tail) }
-        /// N ==> a
-        static member op_EqualsEqualsGreater (l: Path<'a>, r: 'a) : Path<'a> =
-            { Tail = r; Edges = l.Edges |> Set.add (l.Tail, r) }
-
-/// Pseudo Graph Record Type Constructor
-let Path (inval: 'a) = { Tail = inval; Edges = Set.empty }
+open Edgy.Core
 
 /// Combines a sequence of paths, duplicate edges are ignored
-let combine paths = 
+let combine (paths: Path<_> seq) = 
     paths |> Seq.reduce (fun l r -> { r with Edges = Set.union l.Edges r.Edges })
 
 /// Given a set of edges, find all leaves
@@ -57,7 +38,7 @@ let allNodesWithConnected edges =
 
 
 // Example
-let totalGraph = 
+let private totalGraph () = 
     [
         Path 2 <== 1
         Path 2 <== 1 ==> 3
