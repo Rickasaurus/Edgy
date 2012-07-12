@@ -39,6 +39,8 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utility.fs" />
+    <Compile Include="Core.fs" />
     <Compile Include="Graphs.fs" />
     <Compile Include="WeightedGraph.fs" />
     <None Include="Script.fsx" />
