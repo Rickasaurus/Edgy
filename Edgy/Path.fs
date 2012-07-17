@@ -7,10 +7,6 @@
 
 open Edgy.Core
 
-/// Combines a sequence of paths, duplicate edges are ignored
-let combine (paths: Path<_> seq) = 
-    paths |> Seq.reduce (fun l r -> { r with Edges = Set.union l.Edges r.Edges })
-
 /// Given a set of edges, find all leaves
 let leaves edges = 
     edges |> Seq.collect (fun (l,r) -> [l;r]) |> Seq.countBy id |> Seq.filter (snd>>(=)1) |> Seq.map fst

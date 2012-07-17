@@ -12,7 +12,7 @@ open Edgy.Utility
 /// Kruskal's algorithm for undirected weighted graphs.  Will treat all edges are non-directed.
 /// O(NLogN) because of the Sort involved.
 let kruskal (edges: (PathEdge<_>, _) Map) =
-    let N = edges |> weightedEdgesToVertices |> Set.toSeq |> Seq.mapi (fun i n -> n,i) |> Map.ofSeq
+    let N = edges |> edgesToVertices |> Set.toSeq |> Seq.mapi (fun i n -> n,i) |> Map.ofSeq
     let rec inner S (V: QuickUWPC) F = 
         match S with
         | [] -> F
@@ -29,9 +29,9 @@ let kruskal (edges: (PathEdge<_>, _) Map) =
 // Example
 let totalWeightedGraph () =
     [
-        WeightedPath "A" <=|1.0|= "B" =|0.5|=> "C" <=|0.2|= "D"
-        WeightedPath "A" =|0.4|=> "B" =|0.2|=> "C"
-    ] |> combineWeightedPaths
+        Path "A" <=|1.0|= "B" =|0.5|=> "C" <=|0.2|= "D"
+        Path "A" =|0.4|=> "B" =|0.2|=> "C"
+    ] |> combine
 
 //val toalWeightedGraph : WeightedPath<string,float> =
 //  {Tail = "D";
@@ -43,8 +43,8 @@ let totalWeightedGraph () =
 let kruskaltest () =
     let graph = 
         [
-            WeightedPath "A" =|7|=> "B" =|8|=> "C" =|5|=> "E" =|9|=> "G" =|11|=> "F" =|6|=> "D" =|5|=> "A"
-            WeightedPath "D" =|9|=> "B" =|7|=> "E" =|15|=> "D"
-            WeightedPath "E" =|8|=> "F"
-        ] |> combineWeightedPaths
+            Path "A" =|7|=> "B" =|8|=> "C" =|5|=> "E" =|9|=> "G" =|11|=> "F" =|6|=> "D" =|5|=> "A"
+            Path "D" =|9|=> "B" =|7|=> "E" =|15|=> "D"
+            Path "E" =|8|=> "F"
+        ] |> combine
     printfn "%A" (kruskal (graph.Edges))

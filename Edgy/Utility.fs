@@ -33,3 +33,20 @@ type QuickUWPC private (id: int[], sz: int[]) =
 
     /// Creates another QuickUWPC with the same internal structure
     member t.Clone() = new QuickUWPC(Array.copy id, Array.copy sz)
+
+
+module M =
+
+    let create () = Map.empty<int,int>
+
+    let find m i = 
+        let rec lookup i = 
+            match m |> Map.tryFind (i) with
+            | Some (found) -> lookup found
+            | None -> i
+        lookup i
+
+    let union m i j = 
+        let ri = find m i
+        let rj = find m j
+        if ri <> rj then m |> Map.add ri rj else m
