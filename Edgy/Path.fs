@@ -8,21 +8,22 @@
 open Edgy.Core
 
 /// Given a set of edges, find all leaves
-let leaves edges = 
-    edges |> Seq.collect (fun (l,r) -> [l;r]) |> Seq.countBy id |> Seq.filter (snd>>(=)1) |> Seq.map fst
+let leaves (edges: IEdge<'e,'ew> seq) = 
+    edges |> Seq.collect (fun edge -> [edge.From; edge.To]) |> Seq.countBy id |> Seq.filter (snd>>(=)1) |> Seq.map fst
 
 /// Given a set of directed edges represented as tuples s.t. (a,b) implies a is the parent and b is the child, find all nodes and their parents 
-let allNodesWithParents edges =
-    edges |> Seq.collect (fun (l,r) -> [l, Set.empty; r, Set.singleton l]) 
-    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
+let allNodesWithParents (edges: IEdge<'e,'ew> seq) =
+    edges |> Seq.collect (fun edge -> [edge.To, Some edge; edge.From, None]) 
+    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.choose id)
 
 /// Given a set of directed edges represented as tuples s.t. (a,b) implies a is the parent and b is the child, find all nodes with parents and those parents
-let nodesWithParents edges = edges |> Seq.groupBy snd |> Seq.map (fun (n, seq) -> n, seq |> Seq.map fst)
+let nodesWithParents (edges: IEdge<'e,'ew> seq) = 
+    edges |> Seq.map (fun edge -> edge.From, edge ) |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd)
 
 /// Given a set of edges, find all nodes and those they are connected to
-let allNodesWithConnected edges =
-    edges |> Seq.collect (fun (l,r) -> [l, Set.singleton r; r, Set.singleton l]) 
-    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd |> Seq.reduce Set.union)
+let allNodesWithConnected (edges: IEdge<'e,'ew> seq) = 
+    edges |> Seq.collect (fun edge -> [edge.From, edge; edge.To, edge]) 
+    |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd)
 
 // Example
 let private totalGraph () = 

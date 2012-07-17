@@ -92,7 +92,7 @@ module Path =
 
         member t.WeightedEdges = edges
 
-    let weightedPathToWeightedGraph (path: Path<'a, 'b>) : Graph<'a, 'b> = 
+    let pathToGraph (path: Path<'a, 'b>) : Graph<'a, 'b> = 
         new Graph<'a, 'b>(path)
 
     /// Pseudo Graph Record Type Constructor
