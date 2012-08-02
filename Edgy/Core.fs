@@ -14,10 +14,10 @@ type IEdge<'e, 'ew when 'e: comparison> =
 
 //type IVertex<'n, 'e, 'ec> 
 
-type GraphProperties =
-    | None = 0
-    | Simple = 1
-    | Cyclic = 2
+//type GraphProperties =
+//    | None = 0
+//    | Simple = 1
+//    | Cyclic = 2
 
 type IGraph<'e, 'ec when 'e: comparison> =
     interface
