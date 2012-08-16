@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy", "Edgy\Edgy.fsproj", "{6D4440A9-BC93-486F-B9B9-39FFD5799E39}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy.QuickGraph", "Edgy.QuickGraph\Edgy.QuickGraph.fsproj", "{A1823938-8604-4E49-9DB3-1827F1DCA480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
