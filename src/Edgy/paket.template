@@ -1,0 +1,23 @@
+type project
+owners
+    Rick Minerich
+authors 
+    Rick Minerich
+projectUrl
+    http://github.com/Rickasaurus/Edgy
+iconUrl
+    https://raw.githubusercontent.com/Rickasaurus/Edgy/master/docs/files/img/logo.png
+licenseUrl
+    http://github.com/Rickasaurus/Edgy/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    F# fsharp graph graphs dsl
+summary
+    A library to make working with graphs easy in F#
+description
+    A library to make working with graphs easy in F#. It includes a nice DSL for creating them, as well as many useful graph functions.
+
+
