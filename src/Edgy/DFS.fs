@@ -47,7 +47,7 @@ type TraversalResult<'a when 'a : comparison> =
     }
 
 /// Depth-first graph traversal with integer ordering of when nodes were visted
-let traverseWithTimes (startAt: 'a) (graph: IGraph<_,_>) = 
+let traverseWithNodeTimes (startAt: 'a) (graph: IGraph<_,_>) = 
     let onnewvertex v (time, entrytime, exittime) = let time = time + 1 in (time, entrytime |> Map.add v time, exittime), true
     let onedge _ _ state = state, true
     let ondonevertex v (time, entrytime, exittime) = (time, entrytime, exittime |> Map.add v time), true
@@ -81,3 +81,12 @@ let findEdges (startAt: 'a) (predicate: _ -> bool) (graph: IGraph<_,_>) =
         else acc, true
     let onDoneVertex _ acc = acc, true
     dfsPure onNewVertex onEdge onDoneVertex List.empty startAt graph |> List.rev
+
+/// Find first edge in the graph that matches the predicate via Depth-first traversal
+let findFirstEdge  (startAt: 'a) (predicate: _ -> bool) (graph: IGraph<_,_>) = 
+    let onNewVertex _ acc = acc, true
+    let onEdge _ edge acc = 
+        if predicate edge then Some edge, false
+        else acc, true
+    let onDoneVertex _ acc = acc, true
+    dfsPure onNewVertex onEdge onDoneVertex None startAt graph 
