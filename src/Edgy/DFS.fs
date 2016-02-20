@@ -31,7 +31,7 @@ let dfsPure onNewVertex onEdge onDoneVertex initialState startAt (graph: IGraph<
                 let state, cont = onEdge v e state
                 if not cont then state
                 else inner work' discovered state   
-    if adjlist |> Seq.isEmpty |> not then
+    if adjlist |> Map.isEmpty |> not then
         let state, cont = onNewVertex startAt initialState
         if not cont then state
         else inner [startAt, lookupEdges startAt] (Set.singleton startAt) state
