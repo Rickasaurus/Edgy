@@ -1,9 +1,41 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy", "Edgy\Edgy.fsproj", "{6D4440A9-BC93-486F-B9B9-39FFD5799E39}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy.QuickGraph", "Edgy.QuickGraph\Edgy.QuickGraph.fsproj", "{A1823938-8604-4E49-9DB3-1827F1DCA480}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy", "src\Edgy\Edgy.fsproj", "{D8AF5BC0-7F89-48C7-8337-4C6A79A51F01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
+	ProjectSection(SolutionItems) = preProject
+		build.fsx = build.fsx
+		README.md = README.md
+		RELEASE_NOTES.md = RELEASE_NOTES.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175-43B1-4C90-A1EE-8E351C33435D}"
+	ProjectSection(SolutionItems) = preProject
+		docs\tools\generate.fsx = docs\tools\generate.fsx
+		docs\tools\templates\template.cshtml = docs\tools\templates\template.cshtml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D5255-776D-4B61-85F9-73C37AA1FB9A}"
+	ProjectSection(SolutionItems) = preProject
+		docs\content\index.fsx = docs\content\index.fsx
+		docs\content\tutorial.fsx = docs\content\tutorial.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy.Tests", "tests\Edgy.Tests\Edgy.Tests.fsproj", "{39AA0ABC-6955-4BCF-9433-93CABA9D090A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Edgy.QuickGraph", "src\Edgy.QuickGraph\Edgy.QuickGraph.fsproj", "{E4D887DF-818C-474C-9FDE-542D8AC1C5E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,16 +43,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D4440A9-BC93-486F-B9B9-39FFD5799E39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1823938-8604-4E49-9DB3-1827F1DCA480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AF5BC0-7F89-48C7-8337-4C6A79A51F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AF5BC0-7F89-48C7-8337-4C6A79A51F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AF5BC0-7F89-48C7-8337-4C6A79A51F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AF5BC0-7F89-48C7-8337-4C6A79A51F01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39AA0ABC-6955-4BCF-9433-93CABA9D090A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39AA0ABC-6955-4BCF-9433-93CABA9D090A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39AA0ABC-6955-4BCF-9433-93CABA9D090A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39AA0ABC-6955-4BCF-9433-93CABA9D090A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D887DF-818C-474C-9FDE-542D8AC1C5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D887DF-818C-474C-9FDE-542D8AC1C5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D887DF-818C-474C-9FDE-542D8AC1C5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D887DF-818C-474C-9FDE-542D8AC1C5E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
+		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
+		{39AA0ABC-6955-4BCF-9433-93CABA9D090A} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
 	EndGlobalSection
 EndGlobal

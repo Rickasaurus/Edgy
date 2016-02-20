@@ -1,7 +1,7 @@
-﻿module Edgy.QuickGraph
+﻿namespace Edgy
 
-open QuickGraph
 open Edgy.Core
+open QuickGraph
 
 // QuickGraph Edge Types:
 //  classes
@@ -35,7 +35,8 @@ open Edgy.Core
 //      BidirectionalAdapterGraph wraps an adjacency graph into a bidirectional graph (access to in-edges)
 //      UndirectedBidirectionalGraph wraps a bidirectional graph into a undirected graph.
 
-module Path =
+module QuickGraph =
+
     /// Converts an non-weighted Edgy Graph to a QuickGraph graph.
     let toAdjacencyGraph (graph: Edgy.Core.IGraph<'v,unit>) = 
         let outGraph = new AdjacencyGraph<_,QuickGraph.Edge<_>>()
