@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Core.fs" />
-    <Compile Include="Graph.fs" />
     <Compile Include="DirectedPath.fs" />
     <Compile Include="DFS.fs" />
     <Compile Include="Utility.fs" />

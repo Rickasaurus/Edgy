@@ -5,7 +5,9 @@
 #load "Core.fs"
 #endif
 
+open Edgy
 open Edgy.Core
+open Edgy.DSL
 
 /// Given a set of edges, find all leaves
 let leaves (edges: IEdge<'e,'ew> seq) = 
@@ -28,12 +30,12 @@ let allNodesWithConnected (edges: IEdge<'e,'ew> seq) =
 // Example
 let private totalGraph () = 
     [
-        Path 2 <== 1
-        Path 2 <== 1 ==> 3
-        Path 2 ==> 4 <== 3 ==> 5
-        Path 2 ==> 4 <== 3 <== 8
-        Path 4 ==> 6
-    ] |> combine
+        NewPath 2 <== 1
+        NewPath 2 <== 1 ==> 3
+        NewPath 2 ==> 4 <== 3 ==> 5
+        NewPath 2 ==> 4 <== 3 <== 8
+        NewPath 4 ==> 6
+    ] |> Path.combine
 
 // val totalGraph : Path<int> =
 //  {Current = 6;
