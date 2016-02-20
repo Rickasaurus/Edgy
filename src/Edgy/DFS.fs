@@ -32,7 +32,9 @@ let dfsPure onNewVertex onEdge onDoneVertex initialState startAt (graph: IGraph<
                 if not cont then state
                 else inner work' discovered state   
     if adjlist |> Seq.isEmpty |> not then
-        inner [startAt, lookupEdges startAt] Set.empty initialState
+        let state, cont = onNewVertex startAt initialState
+        if not cont then state
+        else inner [startAt, lookupEdges startAt] (Set.singleton startAt) state
     else initialState
 
 /// Result container for the traverseWithTimes function

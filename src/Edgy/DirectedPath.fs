@@ -27,16 +27,3 @@ let allNodesWithConnected (edges: IEdge<'e,'ew> seq) =
     edges |> Seq.collect (fun edge -> [edge.From, edge; edge.To, edge]) 
     |> Seq.groupBy fst |> Seq.map (fun (n, seq) -> n, seq |> Seq.map snd)
 
-// Example
-let private totalGraph () = 
-    [
-        NewPath 2 <== 1
-        NewPath 2 <== 1 ==> 3
-        NewPath 2 ==> 4 <== 3 ==> 5
-        NewPath 2 ==> 4 <== 3 <== 8
-        NewPath 4 ==> 6
-    ] |> Path.combine
-
-// val totalGraph : Path<int> =
-//  {Current = 6;
-//   Edges = set [(1, 2); (1, 3); (2, 4); (3, 4); (3, 5); (4, 6); (8, 3)];}

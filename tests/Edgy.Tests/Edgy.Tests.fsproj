@@ -56,6 +56,8 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
     <Compile Include="Tests.fs" />
+    <Compile Include="DirectedPathTests.fs" />
+    <Compile Include="DFSTests.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
