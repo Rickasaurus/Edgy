@@ -7,7 +7,7 @@ open Edgy.DSL
 open NUnit.Framework
 
 [<Test>]
-let ``traverseWithNodeTimes should propery traverse and label a simple graph`` () =
+let ``traverseWithNodeTimes should properly traverse and label a simple graph`` () =
     let graph = NewPath 0 ==> 1 ==> 2 ==> 3 ==> 4
                 |> Path.toGraph
     let res = DFS.traverseWithNodeTimes 0 graph
