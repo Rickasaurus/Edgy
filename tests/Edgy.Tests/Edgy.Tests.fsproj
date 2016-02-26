@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="Tests.fs" />
     <Compile Include="DirectedPathTests.fs" />
-    <Compile Include="DFSTests.fs" />
+    <Compile Include="SearchTests.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

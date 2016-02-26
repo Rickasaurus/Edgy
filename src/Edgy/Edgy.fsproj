@@ -62,7 +62,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Core.fs" />
     <Compile Include="DirectedPath.fs" />
-    <Compile Include="DFS.fs" />
+    <Compile Include="Search.fs" />
     <Compile Include="Utility.fs" />
     <Compile Include="WeightedPath.fs" />
     <None Include="Script.fsx" />
